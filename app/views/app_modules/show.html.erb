@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @app_module.name %>
+</p>
+
+<p>
+  <strong>Controller:</strong>
+  <%= @app_module.controller %>
+</p>
+
+<p>
+  <strong>Actions:</strong>
+  <%= @app_module.actions %>
+</p>
+
+<%= link_to 'Edit', edit_app_module_path(@app_module) %> |
+<%= link_to 'Back', app_modules_path %>

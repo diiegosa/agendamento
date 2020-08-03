@@ -1,0 +1,55 @@
+<div class="box box-default">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <%= translate_module(:profile, :one) %>
+      <small><%= translate_action(action) %></small>
+    </h3>
+  </div>
+  <!-- form start -->
+  <%= form_with(model: profile, local: true, class: "form-horizontal") do |f| %>
+    <%= render 'layouts/helpers/error', object: profile %>
+    <div class="box-body">
+      <div class="form-group">
+        <label class="col-sm-2 control-label"><%= translate_attr(:name, :profile) %></label>
+          <div class="col-sm-9">
+            <%= f.text_field :name, id: :profile_name, class: "form-control" %>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :admin, id: :profile_admin %>
+              <%= translate_attr(:admin, :profile) %>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="page-header text-muted">Módulos</h4>
+
+      <% Acl::AppModule.all.each_with_index do |m, i| %>
+        <div class="form-group">
+          <label class="col-sm-2 control-label"><%= translate_module(m.module) %></label>
+          <div class="col-sm-9">
+            <%= hidden_field_tag "profile[permissions_attributes][#{i}]app_module_id", m.id %>
+            <select name="profile[permissions_attributes][<%= i %>]actions[]" title="Selecionar ..."
+              class="selectpicker form-control" data-actions-box="true" multiple>
+              <optgroup label="<%= translate_module(m.module) %>">
+                <% m.actions.each do |action| %>
+                  <option value="<%= action %>" <%= 'selected' if @profile.has_action(m.id, action) %>
+                  data-icon="fa fa-arrow-circle-o-right"><%= translate_action(action) %></option>
+                <% end %>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="box-footer">
+      <%= link_to translate_action(:back), profiles_path, class: "btn btn-default" %>
+      <button type="submit" class="btn btn-info pull-right"><%= translate_action(btn_action) %></button>
+    </div><!-- /.box-footer -->
+  <% end %>
+</div>

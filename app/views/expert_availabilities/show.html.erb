@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Expert:</strong>
+  <%= @expert_availability.expert %>
+</p>
+
+<p>
+  <strong>Shift:</strong>
+  <%= @expert_availability.shift %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @expert_availability.date %>
+</p>
+
+<%= link_to 'Edit', edit_expert_availability_path(@expert_availability) %> |
+<%= link_to 'Back', expert_availabilities_path %>

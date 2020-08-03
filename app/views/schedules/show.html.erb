@@ -1,0 +1,18 @@
+<%= render 'layouts/helpers/show',
+  model: :schedule,
+  fields: [
+    { name: :client_name, value: @schedule.client_name },
+    { name: :client_cpf, value: @schedule.client_cpf, extra_class: "cpf" },
+    { name: :client_email, value: @schedule.client_email },
+    { name: :client_cellphone_number, value: @schedule.client_cellphone_number, extra_class: "phone_with_ddd" },
+    { name: :property_sequential_or_protocol, value: @schedule.property_sequential_or_protocol },
+    { name: :date, value: @schedule.date.strftime("%d/%m/%Y") },
+    { name: :time, value: @schedule.time.strftime("%H:%M") },
+    { name: :description, value: @schedule.description },
+    { name: :schedule_protocol, value: @schedule.schedule_protocol },
+    { name: :service, value: @schedule.service.name },
+    { name: :service_point, value: @schedule.service_point.name }
+  ],
+  model_path: schedules_path
+%>
+

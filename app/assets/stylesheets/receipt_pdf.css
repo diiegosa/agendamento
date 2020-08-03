@@ -1,0 +1,51 @@
+#client_informations {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#client_informations td, #client_informations th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#client_informations tr:hover {background-color: #ddd;}
+
+#client_informations th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color:rgb(76, 130, 175);
+  color: white;
+}
+
+h1 {
+    font-size: 20px;
+    line-height: 15px;
+}
+
+#logo_cbmpe {
+    height: 120px;
+    width: 120px;
+    float: left;
+    padding-right: 10px;
+}
+
+#electronic_scheduling {
+    font-size: 15px;
+}
+
+section {
+    padding-top: 30px;
+}
+
+hr {
+    width: 607px;
+    height: 8px;
+    float: left;
+    background: black;
+    margin-left: 1px;
+    margin-top: 1px;
+}
+
+

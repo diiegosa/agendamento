@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Service point:</strong>
+  <%= @availability.service_point %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @availability.service %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @availability.date %>
+</p>
+
+<p>
+  <strong>Attendant number:</strong>
+  <%= @availability.attendant_number %>
+</p>
+
+<%= link_to 'Edit', edit_availability_path(@availability) %> |
+<%= link_to 'Back', availabilities_path %>

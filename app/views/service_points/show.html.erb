@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @service_point.name %>
+</p>
+
+<p>
+  <strong>Acronym:</strong>
+  <%= @service_point.acronym %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @service_point.city %>
+</p>
+
+<p>
+  <strong>Neighborhood:</strong>
+  <%= @service_point.neighborhood %>
+</p>
+
+<p>
+  <strong>Public area:</strong>
+  <%= @service_point.public_area %>
+</p>
+
+<p>
+  <strong>Cep:</strong>
+  <%= @service_point.cep %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @service_point.number %>
+</p>
+
+<%= link_to 'Edit', edit_service_point_path(@service_point) %> |
+<%= link_to 'Back', service_points_path %>

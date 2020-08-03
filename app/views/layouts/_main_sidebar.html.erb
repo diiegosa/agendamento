@@ -1,0 +1,45 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="header"></li>
+      <li class=""><a href="/"><i class="fa fa-home"></i> <span>Home</span></a></li>
+      <% make_menu.each do |menu|%>
+        <% if menu[:children].empty? %>
+          <% if can?(menu[:action].to_sym, menu[:model].constantize)  %>
+            <li class="">
+              <a href="<%= url_for(menu[:model].constantize) %>">
+                <i class="<%= menu[:icon] %>"></i> <span><%= translate_module(menu[:model]) %></span>
+              </a>
+            </li>
+          <% end %>
+        <% else %>
+          <li class="treeview">
+            <a href="#">
+              <i class="<%= menu[:icon] %>"></i>
+              <span><%= menu[:model] %></span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <% menu[:children].each do |item|%>
+                <% if can?(item[:action].to_sym, item[:model].constantize)  %>
+                  <li class="">
+                    <a href="<%= url_for(item[:model].constantize) %>">
+                      <i class="<%= item[:icon] %>"></i> <%= translate_module(item[:model]) %>
+                    </a>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+    <!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
+</aside>

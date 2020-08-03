@@ -1,0 +1,11 @@
+<%= render 'layouts/helpers/form_box',
+  action: :update,
+  model: :expert,
+  object: @expert,
+  model_path: experts_path,
+  btn_action: :edit,
+  fields: [
+    { kind: :text_field, name: :name, extra_class: '', required: true },
+    { kind: :select, name: :service_point_id, collection: @service_points.collect {|p| [ p.name, p.id ]}, extra_class: '', required: true},
+    { kind: :multselect, name: :service_ids,  extra_class: 'selectpicker', collection: @services.collect {|p| [ p.name, p.id ]} }
+  ] %>

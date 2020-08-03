@@ -1,0 +1,8 @@
+<%= render 'layouts/helpers/index',
+    model: :profile,
+    controller: :profiles,
+    attributes: [:name, :admin],
+    actions: [:show, :edit, :delete],
+    delete_identification: :name,
+    collection: @profiles,
+    search_match: :name_cont %>

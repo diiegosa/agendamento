@@ -1,0 +1,42 @@
+<div class="box box-default">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <%= translate_module(:profile, :one) %>
+      <small><%= translate_action(:show) %></small>
+    </h3>
+  </div>
+  <div class="box-body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2 control-label"><%= translate_attr(:name, :profile) %></label>
+        <div class="col-sm-10">
+          <p class="form-control-static"><%= @profile.name %></p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label"><%= translate_attr(:admin, :profile) %></label>
+        <div class="col-sm-10">
+          <p class="form-control-static"><%= @profile.admin ? 'SIM' : 'NÃO' %></p>
+        </div>
+      </div>
+
+      <% unless @profile.permissions.empty? %>
+        <h4 class="page-header text-muted">Módulos</h4>
+      <% end %>
+
+      <% @profile.permissions.each do |permission| %>
+        <div class="form-group">
+          <label class="col-sm-2 control-label"><%= translate_module(permission.app_module.module) %></label>
+          <div class="col-sm-10">
+            <p class="form-control-static"><%= permission.actions.map{|a| translate_action(a)}.to_s %></p>
+          </div>
+        </div>
+      <% end %>
+
+    </form>
+  </div>
+  <div class="box-footer">
+    <%= link_to translate_action(:back), profiles_path, class: "btn btn-default" %>
+    <%= link_to translate_action(:edit), edit_profile_path(@profile), class: "btn btn-info pull-right" %>
+  </div><!-- /.box-footer -->
+</div>

@@ -1,0 +1,13 @@
+<%= render 'layouts/helpers/form_box',
+  action: :edit,
+  model: :user,
+  object: @user,
+  model_path: users_path,
+  btn_action: :update,
+  fields: [
+    {kind: :select, name: :profile_id, collection: @profiles.collect {|p| [ p.name, p.id ]}, extra_class: ''},
+    {kind: :text_field, name: :name, extra_class: ''},
+    {kind: :text_field, name: :email, extra_class: ''},
+    {kind: :text_field, name: :cpf, extra_class: ''},
+    {kind: :password_field, name: :password, extra_class: ''}
+  ] %>

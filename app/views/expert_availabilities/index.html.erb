@@ -1,0 +1,90 @@
+<div class="box box-default">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <strong><%= translate_module(:expert_availability, :other) %></strong>
+    </h3>
+    <div class="row"><hr></div>
+    <% if !flash[:warning].blank? %>
+      <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-exclamation-triangle"></i> Atenção:</h4>
+        <h5><b>Já havia sido criada disponibilidade para:</b></h5>
+        <div id="error_explanation">
+          <ul>
+            <% flash[:warning].each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col-md-4">
+        <%= search_form_for @q do |f| %>
+          <div class="input-group input-group-sm">
+            <%= f.search_field :expert_name_cont, class: "form-control", placeholder: 'Procure pelo nome do especialista' %>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default btn-flat">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <%= search_form_for @q do |f| %>
+          <div class="input-group input-group-sm">
+            <%= f.search_field :date_eq, class: 'form-control', id: 'datetimepicker6', placeholder: 'Procure pela data' %>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default btn-flat">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <%= link_to translate_action(:create),
+          { controller: :expert_availabilities, action: :new },
+          class: 'btn btn-primary pull-right' %>
+      </div>
+    </div>
+  </div>
+  <div class="box-body">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+            <th title="Ordenar pelo nome do especialista"><%= sort_link(@q, :expert, translate_attr(:expert_id, :expert_availability)) %></th>
+            <th title="Ordenar pela data"><%= sort_link(@q, :date, translate_attr(:date, :expert_availability)) %></th>
+            <th title="Ordenar pelo turno"><%= sort_link(@q, :shift, translate_attr(:shift, :expert_availability)) %></th>
+            <th colspan="1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @expert_availabilities.each do |expert_availability| %>
+          <tr>
+            <td><%= expert_availability.expert.name %></td>
+            <td><%= expert_availability.date.strftime("%d/%m/%Y") %></td>
+            <td><%= expert_availability.shift %></td>
+            <td align="center">
+              <%= link_to [:edit, expert_availability], class: 'btn btn-info btn-sm' do %>
+                  <i class="fa fa-edit"></i>
+              <% end %>
+              <%= render 'layouts/helpers/delete', object: expert_availability, identification: :date %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @expert_availabilities %>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker6').datetimepicker({
+          format: 'DD/MM/YYYY',
+          locale: 'pt-br',
+          useCurrent: false
+    });
+  });
+</script>

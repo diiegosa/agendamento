@@ -1,0 +1,33 @@
+<div class="box box-default">
+    <%= render 'layouts/helpers/search_box',
+        model: :expert,
+        controller: :experts,
+        search_match: :name_cont,
+        not_create: defined? not_create %>
+    <div class="box-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th> <%= translate_attr(:name, :expert) %> </th>
+                    <th> <%= translate_attr(:service_point, :expert) %> </th>
+                <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @experts.each do |expert| %>
+                    <tr>
+                        <td> <%= expert.name %> </td>
+                        <td> <%= expert.service_point.name %> </td>
+
+                        <td align="center">
+                            <%= link_to [:edit, expert], class: 'btn btn-info btn-sm' do %>
+                            <i class="fa fa-edit"></i>
+                            <% end %>
+                            <%= render 'layouts/helpers/delete', object: expert, identification: :name %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

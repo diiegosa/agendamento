@@ -1,0 +1,93 @@
+<div class="box box-default">
+  <div class="box-header with-border">
+    <div class="col-md-8">
+      <h3 class="box-title">
+        <strong><%= translate_module(:schedule, :other) %></strong>
+      </h3>
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right">
+        <a href="/novo_sga_attendance_queue_today" class="btn btn-block btn-social btn-twitter">
+            <i class="fa fa-exchange"></i> Listar agendamentos do dia no SGA
+        </a>
+      </div>
+    </div>
+    <div class="row"><hr></div>
+
+    <% if !@attendance_queue_today_message.nil? %>
+      <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h5><i class="icon fa fa-exclamation-triangle"></i><%= @attendance_queue_today_message %></h5>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= search_form_for @q do |f| %>
+          <div class="input-group input-group-sm">
+            <%= f.search_field :client_name_or_client_cpf_or_client_email_cont, class: "form-control", placeholder: 'Procure pelo nome, CPF ou email' %>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default btn-flat">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <%= search_form_for @q do |f| %>
+          <div class="input-group input-group-sm">
+            <%= f.search_field :date_eq, class: 'form-control', id: 'datetimepicker6', placeholder: 'Procure pela data' %>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default btn-flat">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="box-body">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+            <th><%= translate_attr(:client_name, :schedule) %></th>
+            <th><%= translate_attr(:client_cpf, :schedule) %></th>
+            <th><%= translate_attr(:client_email, :schedule) %></th>
+            <th title="Ordenar pela data"><%= sort_link(@q, :date, translate_attr(:date, :schedule)) %></th>
+            <th><%= translate_attr(:time, :schedule) %></th>
+            <th><%= translate_attr(:sga_status, :schedule) %></th>
+            <th colspan="1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @schedules.each do |schedule| %>
+          <tr>
+            <td><%= schedule.client_name %></td>
+            <td class="cpf"><%= schedule.client_cpf %></td>
+            <td><%= schedule.client_email %></td>
+            <td><%= schedule.date.strftime("%d/%m/%Y") %></td>
+            <td><%= schedule.time.strftime("%H:%M") %></td>
+            <td><%= show_status(schedule.sga_status) %></td>
+            <td align="center">
+              <%= link_to schedule, class: 'btn btn-default btn-sm' do %>
+                <i class="fa fa-file-text"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @availabilities %>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker6').datetimepicker({
+          format: 'DD/MM/YYYY',
+          locale: 'pt-br',
+          useCurrent: false
+    });
+  });
+</script>

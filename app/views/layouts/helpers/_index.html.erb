@@ -1,0 +1,43 @@
+<div class="box box-default">
+  <%= render 'layouts/helpers/search_box',
+    model: model,
+    controller: controller,
+    search_match: search_match,
+    not_create: defined? not_create %>
+  <div class="box-body">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <% attributes.each do |attr| %>
+            <th> <%= attr.is_a?(Hash) ? translate_attr(attr[:model], model) : translate_attr(attr, model) %> </th>
+          <% end %>
+          <th colspan="<%= actions.count %>"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% collection.each do |object| %>
+          <tr>
+            <% attributes.each do |attr| %>
+              <td> <%= attr.is_a?(Hash) ? object.send(attr[:model])[attr[:attr]] : object[attr] %> </td>
+            <% end %>
+            <td align="center">
+              <% if actions.include?(:show) %>
+                <%= link_to object, class: 'btn btn-default btn-sm' do %>
+                  <i class="fa fa-file-text"></i>
+                <% end %>
+              <% end %>
+              <% if actions.include?(:edit) %>
+                <%= link_to [:edit, object], class: 'btn btn-info btn-sm' do %>
+                  <i class="fa fa-edit"></i>
+                <% end %>
+              <% end %>
+              <% if actions.include?(:delete) %>
+                <%= render 'layouts/helpers/delete', object: object, identification: delete_identification %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

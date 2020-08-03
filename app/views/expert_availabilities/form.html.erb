@@ -1,0 +1,65 @@
+<div class="box box-default">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <%= translate_module(:expert_availability, :one) %>
+      <small><%= translate_action(:new) %></small>
+    </h3>
+  </div>
+
+  <div class="box-body">
+    <!-- form start -->
+    <%= form_with(model: @expert_availability, local: true, class: "form-horizontal", html: { multipart: true }) do |form| %>
+      <% if flash[:error] %>
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h4><i class="icon fa fa-ban"></i> Erro</h4>
+          <div id="error_explanation">
+            <ul>
+            <% flash[:error].each do |index, message| %>
+              <li><%= "#{translate_attr(index, :expert_availability)}  #{message}" %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+      <% if @expert_availability.errors.any? %>
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h4><i class="icon fa fa-ban"></i> Erro</h4>
+          <div id="error_explanation">
+            <ul>
+            <% @expert_availability.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label"><%= translate_attr(:expert_id, :expert_availability) %>*</label>
+        <div class="col-sm-9">
+          <%= form.select :expert_id, @experts.collect {|p| [ p.name, p.id ]}, { prompt: 'Selecionar ...'}, {class: "form-control", required: true} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label"><%= translate_attr(:shift, :expert_availability) %>*</label>
+        <div class="col-sm-9">
+          <% if action == :create %>
+            <%= form.select(:shift, [['Manhã', 1], ['Tarde', 2]], {include_hidden: false}, { class: "form-control", multiple: true, title: "Selecionar ...", required: true }) %>
+          <% else %>
+            <%= form.select(:shift, [['Manhã', 1], ['Tarde', 2]], {prompt: "Selecionar ..."}, { class: "form-control", title: "Selecionar ...", required: true }) %>
+          <% end %>
+        </div>
+      </div>
+
+      <%= yield :expert_availabilities_form %>
+
+      <div class="box-footer">
+        <%= link_to translate_action(:back), expert_availabilities_path, class: "btn btn-default" %>
+        <button type="submit" class="btn btn-info pull-right"><%= translate_action(action) %></button>
+      </div>
+      <!-- /.box-footer -->
+    <% end %>
+  </div>
+</div>

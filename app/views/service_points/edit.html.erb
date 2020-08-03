@@ -1,0 +1,15 @@
+<%= render 'layouts/helpers/form_box',
+  action: :edit,
+  model: :service_point,
+  object: @service_point,
+  model_path: service_points_path,
+  btn_action: :update,
+  fields: [
+    { kind: :select, name: :novo_sga_service_point_id,  extra_class: 'selectpicker',
+      collection: @novo_sga_service_points.collect {|p| [ p.nome, p.id ]}, required: true  },
+    {kind: :text_field, name: :city, extra_class: '', required: true},
+    {kind: :text_field, name: :neighborhood, extra_class: '', required: true},
+    {kind: :text_field, name: :public_area, extra_class: '', required: true},
+    {kind: :text_field, name: :cep, extra_class: '', required: false},
+    {kind: :text_field, name: :number, extra_class: '', required: true},
+  ] %>

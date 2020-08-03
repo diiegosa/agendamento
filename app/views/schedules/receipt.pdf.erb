@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Agendamento Eletrônico</title>
+    <%= wicked_pdf_stylesheet_link_tag "receipt_pdf" %>
+</head>
+<body>
+    <section>
+        <%= wicked_pdf_image_tag 'logo_cbmpe.png', id:'logo_cbmpe' %>
+        <h1 id="socialDefenseSecretary">SECRETARIA DE DEFESA SOCIAL</h1>
+        <h1 id="cbmpe">CORPO DE BOMBEIROS MILITAR DE PERNAMBUCO</h1>
+        <hr>
+        <h1 id="electronic_scheduling">AGENDAMENTO ELETRÔNICO</h1>
+    </section>
+    <section>
+        <table id="client_informations">
+            <tbody>
+                <tr>
+                    <th style="width:30%">Nº do agendamento (usado para cancelar o agendamento, caso necessário):</th>
+                    <td><%= @schedule.schedule_protocol %></td>
+                </tr>
+                <tr>
+                    <th>Senha (será chamada no monitor, no local e horário agendados):</th>
+                    <td><%= @schedule.get_sga_token %></td>
+                </tr>
+                <tr>
+                    <th>Nome:</th>
+                    <td><%= @schedule.client_name %></td>
+                </tr>
+                <tr>
+                    <th>CPF:</th>
+                    <td><%= @schedule.client_cpf %></td>
+                </tr>
+                <% if (@schedule.property_sequential_or_protocol.nil?) %>
+                    <tr>
+                        <th>Sequencial do imóvel (ou protocolo):</th>
+                        <td><%= @schedule.property_sequential_or_protocol %></td>
+                    </tr>
+                <% end %>
+                <tr>
+                    <th>Serviço:</th>
+                    <td><%= @schedule.service.name %></td>
+                </tr>
+                <tr>
+                    <th>Ponto de atendimento:</th>
+                    <td><%= @schedule.service_point.name %></td>
+                </tr>
+                <tr>
+                    <th>Data:</th>
+                    <td><%= @schedule.date.strftime("%d/%m/%Y") %></td>
+                </tr>
+                <tr>
+                    <th>Horário:</th>
+                    <td><%= @schedule.time.strftime("%H:%M") %></td>
+                </tr>
+                <tr>
+                    <th>Documento(s) necessário(s):</th>
+                    <td><%= @schedule.service.document %></td>
+                </tr>
+                <% if (@schedule.has_expert?) %>
+                    <tr>
+                        <th>Nome do analista:</th>
+                        <td><%= @schedule.get_expert_name %></td>
+                    </tr>
+                <% end %>
+                <tr>
+                    <th>Endereço do ponto de atendimento:</th>
+                    <td><%= @schedule.service_point.get_address %></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

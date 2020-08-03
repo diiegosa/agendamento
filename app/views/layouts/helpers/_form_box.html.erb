@@ -1,0 +1,75 @@
+<div class="box box-default">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <%= translate_module(model, :one) %>
+      <small><%= translate_action(action) %></small>
+    </h3>
+  </div>
+  <div class="box-body">
+    <!-- form start -->
+    <%= form_with(model: object, local: true, class: "form-horizontal", html: { multipart: true }) do |form| %>
+      <%= render  'layouts/helpers/error', object: object %>
+      <% fields.each do |field| %>
+        <div class="form-group">
+          <% if field[:kind] === :text_field %>
+            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %> <%= '*' if(field[:required])%></label>
+            <div class="col-sm-9">
+              <%= form.text_field field[:name], class: "form-control #{field[:extra_class]}", required: field[:required] %>
+            </div>
+          <% elsif field[:kind] === :number_field %>
+            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %> <%= '*' if(field[:required])%></label>
+            <div class="col-sm-9">
+              <%= form.number_field field[:name], class: "form-control #{field[:extra_class]}", step: field[:step], required: field[:required] %>
+            </div>
+          <% elsif field[:kind] === :password_field %>
+            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %> <%= '*' if(field[:required])%></label>
+            <div class="col-sm-9">
+              <%= form.password_field field[:name], class: "form-control #{field[:extra_class]}", required: field[:required] %>
+            </div>
+          <% elsif field[:kind] === :text_area %>
+            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %> <%= '*' if(field[:required])%></label>
+            <div class="col-sm-9">
+              <%= form.text_area field[:name], class: "form-control #{field[:extra_class]}", rows: 4, required: field[:required] %>
+            </div>
+          <% elsif field[:kind] === :select %>
+            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %> <%= '*' if(field[:required])%></label>
+            <div class="col-sm-9">
+              <%= form.select(field[:name], field[:collection], { prompt: 'Selecionar ...'},
+                { class: "form-control #{field[:extra_class]}", required: field[:required] }) %>
+            </div>
+          <% elsif field[:kind] === :multselect %>
+            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %> <%= '*' if(field[:required])%></label>
+            <div class="col-sm-9">
+              <%= form.select(field[:name], field[:collection], {},
+                { class: "form-control #{field[:extra_class]}", multiple: true, title: "Selecionar ...", required: field[:required] }) %>
+            </div>
+          <% elsif field[:kind] === :file_field %>
+            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %> <%= '*' if(field[:required])%></label>
+            <div class="col-sm-9">
+              <%= form.file_field field[:name] %>
+            </div>
+            <% if object.send(field[:name]).present? %>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %> (download) <%= '*' if(field[:required])%></label>
+              <div class="col-sm-9">
+                <div class="col-sm-3">
+                  <%= link_to "Clique para baixar o arquivo", object.send(field[:name]).url(:original, false), target: "_blank" %>
+                </div>
+                <div class="col-sm-1">
+                  <%= render 'layouts/helpers/attachment_delete', attachment_name: field[:name].to_s %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="box-footer">
+        <%= link_to translate_action(:back), model_path, class: "btn btn-default" %>
+        <button type="submit" class="btn btn-info pull-right"><%= translate_action(btn_action) %></button>
+      </div>
+      <!-- /.box-footer -->
+    <% end %>
+  </div>
+</div>

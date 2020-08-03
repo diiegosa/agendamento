@@ -1,0 +1,9 @@
+<ul>
+  <li><a href="/"><%= translate_module('home') %></a></li>
+  <% Acl::AppModule.all.each do |m|%>
+    <% if can? :index, m.module.constantize  %>
+      <li><%= link_to translate_module(m.module), controller: m.controller.gsub!('Controller', '').underscore %></li>
+    <% end %>
+  <% end %>
+  <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+</ul>

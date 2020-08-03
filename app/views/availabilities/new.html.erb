@@ -1,0 +1,63 @@
+<div class="box box-default">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <%= translate_module(:availability, :one) %>
+      <small><%= translate_action(:new) %></small>
+    </h3>
+  </div>
+
+  <div class="box-body">
+    <% if flash[:error] %>
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-ban"></i> Erro</h4>
+        <div id="error_explanation">
+          <ul>
+          <% flash[:error].each do |index, message| %>
+            <li><%= "#{translate_attr(index, :availability)}  #{message}" %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+    <!-- form start -->
+    <%= form_with(model: @availability, local: true, class: "form-horizontal", html: { multipart: true }) do |form| %>
+
+      <div id="availability_form_new">
+        <%= javascript_pack_tag 'src/scenes/availabilities/form_new' %>
+      </div>
+
+      <div class="box-footer">
+        <%= link_to translate_action(:back), availabilities_path, class: "btn btn-default" %>
+        <button type="submit" class="btn btn-info pull-right"><%= translate_action(:create) %></button>
+      </div>
+
+      <script type="text/javascript">
+          $(function () {
+              $('#datetimepicker6').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                    locale: 'pt-br',
+                    useCurrent: false
+              });
+              $('#datetimepicker7').datetimepicker({
+                    format: 'DD/MM/YYYY',
+                    locale: 'pt-br',
+                    useCurrent: false //Important! See issue #1075
+              });
+              $("#datetimepicker6").on("dp.change", function (e) {
+                  $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+              });
+              $("#datetimepicker7").on("dp.change", function (e) {
+                  $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
+
+      <!-- /.box-footer -->
+    <% end %>
+  </div>
+</div>
+
+
+
+

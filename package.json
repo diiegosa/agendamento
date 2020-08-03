@@ -1,0 +1,19 @@
+{
+  "name": "agilhub_oculum_catalog",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "3.5",
+    "admin-lte": "^2.4.10",
+    "axios": "^0.18.0",
+    "babel-preset-react": "^6.24.1",
+    "bootstrap-select": "^1.13.7",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-text-mask": "^5.4.3",
+    "recharts": "^1.5.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  }
+}

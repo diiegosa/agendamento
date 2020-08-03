@@ -1,0 +1,67 @@
+<%= form_with(model: schedule, local: true) do |form| %>
+  <% if schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+
+      <ul>
+      <% schedule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :client_name %>
+    <%= form.text_field :client_name, id: :schedule_client_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :client_cpf %>
+    <%= form.text_field :client_cpf, id: :schedule_client_cpf %>
+  </div>
+
+  <div class="field">
+    <%= form.label :property_sequential %>
+    <%= form.text_field :property_sequential, id: :schedule_property_sequential %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :schedule_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cellphone_number %>
+    <%= form.text_field :cellphone_number, id: :schedule_cellphone_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :service_id %>
+    <%= form.text_field :service_id, id: :schedule_service_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :service_point_id %>
+    <%= form.text_field :service_point_id, id: :schedule_service_point_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date, id: :schedule_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time %>
+    <%= form.time_select :time, id: :schedule_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descrition %>
+    <%= form.text_area :descrition, id: :schedule_descrition %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

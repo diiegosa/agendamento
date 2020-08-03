@@ -1,0 +1,16 @@
+<% content_for :expert_availabilities_form do %>
+    <div id="expert_availability_date_to_form_edit">
+        <%= javascript_pack_tag 'src/scenes/expert_availabilities/date_to_form_edit', id: 'expert_availability_date_to_form_edit_node', data: @expert_availability.date.to_json %>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker6').datetimepicker({
+                format: 'DD/MM/YYYY',
+                locale: 'pt-br',
+                useCurrent: false
+            });
+        });
+    </script>
+<% end %>
+
+<%= render template: "expert_availabilities/form", locals: {action: :update} %>

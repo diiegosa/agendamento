@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Agendamento Eletrônico</title>
+    <style>
+        #email_content {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        h1 {
+            font-size: 20px;
+            line-height: 15px;
+        }
+        #logo_cbmpe {
+            height: 120px;
+            width: 120px;
+            float: left;
+            padding-right: 10px;
+        }
+        #electronic_scheduling {
+            font-size: 15px;
+            margin-top:40px;
+        }
+        section {
+            padding-top: 30px;
+        }
+        hr {
+            width: 607px;
+            height: 8px;
+            float: left;
+            background: black;
+            margin-left: 1px;
+            margin-top: 1px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <%= image_tag(attachments['logo_cbmpe.png'].url, id: "logo_cbmpe") %>
+        <h1 id="socialDefenseSecretary">SECRETARIA DE DEFESA SOCIAL</h1>
+        <h1 id="cbmpe">CORPO DE BOMBEIROS MILITAR DE PERNAMBUCO</h1>
+        <hr>
+        <h1 id="electronic_scheduling">AGENDAMENTO ELETRÔNICO</h1>
+    </section>
+    <section id="email_content">
+        <p>O agendamento na data/hora: <%= @schedule.get_pt_br_datetime %>,</p>
+        <p>referente ao serviço: <%= @schedule.service.name %>,</p>
+        <p>no local: <%= @schedule.service_point.name %></p>
+        <p>foi CANCELADO com sucesso.</p>
+    </section>
+</body>
+</html>

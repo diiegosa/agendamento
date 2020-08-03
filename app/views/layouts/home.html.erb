@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta name="turbolinks-visit-control" content="reload">
+        <title><%= ENV['environment'] %> - Agendamento Eletrônico</title>
+        <%= csrf_meta_tags %>
+        <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+       <!-- Google Font -->
+        <link rel="stylesheet"
+                href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        </head>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
+    <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+    <body>
+        <div class="container">
+            <div id="schedules_header">
+                <%= javascript_pack_tag 'src/scenes/schedules/header' %>
+            </div>
+
+            <div class="content">
+                <%= yield %>
+            </div>
+        </div> <!-- /container -->
+    </body>
+</html>

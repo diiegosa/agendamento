@@ -1,0 +1,52 @@
+<%= form_with(model: service_point, local: true) do |form| %>
+  <% if service_point.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(service_point.errors.count, "error") %> prohibited this service_point from being saved:</h2>
+
+      <ul>
+      <% service_point.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :service_point_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :acronym %>
+    <%= form.text_field :acronym, id: :service_point_acronym %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :service_point_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :neighborhood %>
+    <%= form.text_field :neighborhood, id: :service_point_neighborhood %>
+  </div>
+
+  <div class="field">
+    <%= form.label :public_area %>
+    <%= form.text_field :public_area, id: :service_point_public_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cep %>
+    <%= form.text_field :cep, id: :service_point_cep %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.text_field :number, id: :service_point_number %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

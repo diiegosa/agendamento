@@ -1,0 +1,26 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#<%=attachment_name%>_delete" title="Deletar arquivo">
+  <i class="fa fa-trash-o"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="<%=attachment_name%>_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Confirmar exclusão</h4>
+      </div>
+      <div class="modal-body">
+        Deseja realmente deletar o arquivo?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">
+        <%= translate_action(:cancel) %></button>
+        <%= link_to translate_action(:destroy), attachment_name, method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
