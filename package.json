@@ -4,7 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "admin-lte": "^2.4.10",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-preset-react": "^6.24.1",
     "bootstrap-select": "^1.13.7",
     "prop-types": "^15.7.2",
